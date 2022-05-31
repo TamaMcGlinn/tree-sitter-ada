@@ -1,0 +1,11 @@
+==================
+With statements
+==================
+
+with Ada.Text_IO;
+
+---
+
+(source_file
+  (with_statement
+    (package_name)))
