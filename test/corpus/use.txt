@@ -2,12 +2,10 @@
 Use statements
 ==================
 
-with Ada.Text_IO; use Ada.Text_IO;
+use Ada.Text_IO;
 
 ---
 
 (source_file
-  (with_statement
-    (package_name))
   (use_clause
     (package_name)))
