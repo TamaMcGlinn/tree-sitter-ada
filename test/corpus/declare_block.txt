@@ -1,0 +1,24 @@
+==================
+Declare block
+==================
+
+procedure Foo is
+begin
+  declare
+  begin
+    null;
+  end;
+end Foo;
+
+---
+
+(source_file
+  (procedure_definition
+    name: (identifier)
+    procedure_body: (expressions
+      (expression
+        (declare_block
+          expressions: (expressions
+            (expression
+              (null_statement))))))
+    end_name: (identifier)))

@@ -1,0 +1,18 @@
+==================
+Procedure definition
+==================
+
+procedure Foo is
+begin
+  null;
+end Foo;
+
+---
+
+(source_file
+  (procedure_definition
+    name: (identifier)
+    procedure_body: (expressions
+      (expression
+        (null_statement)))
+    end_name: (identifier)))
