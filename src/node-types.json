@@ -1,5 +1,20 @@
 [
   {
+    "type": "comment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "comment_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "declaration",
     "named": true,
     "fields": {},
@@ -252,6 +267,10 @@
       "required": false,
       "types": [
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "function_definition",
           "named": true
         },
@@ -383,6 +402,10 @@
     "named": false
   },
   {
+    "type": "--",
+    "named": false
+  },
+  {
     "type": ":",
     "named": false
   },
@@ -401,6 +424,10 @@
   {
     "type": "bool",
     "named": false
+  },
+  {
+    "type": "comment_body",
+    "named": true
   },
   {
     "type": "declare",

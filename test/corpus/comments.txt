@@ -1,0 +1,19 @@
+==================
+Comments
+==================
+
+-- Something
+-- _;,.*&#^!@ -- still comment
+
+with Ada.Text_IO; -- inline comment
+--
+
+---
+
+(source_file
+  (comment (comment_body))
+  (comment (comment_body))
+  (with_statement
+    (package_name))
+  (comment (comment_body))
+  (comment))

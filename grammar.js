@@ -8,8 +8,13 @@ module.exports = grammar({
       $.with_statement,
       $.use_clause,
       $.procedure_definition,
-      $.function_definition
+      $.function_definition,
+      $.comment
     ),
+
+    comment: $ => seq('--', optional($.comment_body)),
+
+    comment_body: $ => /.+/,
 
     with_statement: $ => seq(
       'with',
