@@ -9,7 +9,19 @@ module.exports = grammar({
       $.use_clause,
       $.procedure_definition,
       $.function_definition,
-      $.comment
+      $.procedure_declaration,
+      $.function_declaration,
+      $.comment,
+      $.package_specification
+    ),
+
+    package_specification: $ => seq(
+      'package',
+      field('name', $.package_name),
+      'is',
+      'end',
+      field('end_name', optional($.identifier)),
+      ';'
     ),
 
     comment: $ => seq('--', optional($.comment_body)),
@@ -41,6 +53,13 @@ module.exports = grammar({
       ';'
     ),
 
+    procedure_declaration: $ => seq(
+      'procedure',
+      field('name', $.identifier),
+      field('parameter_list', optional($.parameter_list)),
+      ';'
+    ),
+
     function_definition: $ => seq(
       'function',
       field('name', $.identifier),
@@ -52,6 +71,14 @@ module.exports = grammar({
       field('function_body', $.expressions),
       'end',
       field('end_name', optional($.identifier)),
+      ';'
+    ),
+
+    function_declaration: $ => seq(
+      'function',
+      field('name', $.identifier),
+      field('parameter_list', optional($.parameter_list)),
+      optional($._return_clause),
       ';'
     ),
 
@@ -85,7 +112,8 @@ module.exports = grammar({
     parameter_declaration: $ => seq(
       field('parameter_name', $.identifier),
       ':',
-      field('type', $.identifier)
+      field('type', $.identifier),
+      field('default_value', optional($.variable_initialization))
     ),
 
     argument_list: $ => seq('(', commaSep($.value), ')'),
@@ -122,12 +150,6 @@ module.exports = grammar({
     ),
 
     null_statement: $ => 'null',
-
-    parameter_list: $ => seq(
-      '(',
-       // TODO: parameters
-      ')'
-    ),
 
     _type: $ => choice(
       'bool'

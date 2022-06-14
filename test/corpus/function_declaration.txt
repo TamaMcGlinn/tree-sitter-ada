@@ -1,0 +1,19 @@
+==================
+Function declaration
+==================
+
+function Foo (A : Param_Type; B : Other_Param_Type) return Boolean;
+
+---
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameter_list: (parameter_list
+      (parameter_declaration
+        parameter_name: (identifier)
+        type: (identifier))
+      (parameter_declaration
+        parameter_name: (identifier)
+        type: (identifier)))
+    return_type: (identifier)))

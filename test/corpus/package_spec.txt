@@ -1,0 +1,12 @@
+==================
+Package specification
+==================
+
+package Foo is
+end;
+
+---
+
+(source_file
+  (package_specification
+    (package_name)))
