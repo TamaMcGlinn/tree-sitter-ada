@@ -1,0 +1,18 @@
+==================
+Function definition
+==================
+
+function Foo return Boolean is
+begin
+  return True;
+end;
+
+---
+
+(source_file
+  (function_definition
+    name: (identifier)
+    return_type: (identifier)
+    function_body: (expressions
+      (expression
+        (return_statement (value (identifier)))))))

@@ -7,7 +7,8 @@ module.exports = grammar({
     _definition: $ => choice(
       $.with_statement,
       $.use_clause,
-      $.procedure_definition
+      $.procedure_definition,
+      $.function_definition
     ),
 
     with_statement: $ => seq(
@@ -31,8 +32,27 @@ module.exports = grammar({
       'begin',
       field('procedure_body', $.expressions),
       'end',
-      field('end_name', $.identifier),
+      field('end_name', optional($.identifier)),
       ';'
+    ),
+
+    function_definition: $ => seq(
+      'function',
+      field('name', $.identifier),
+      field('parameter_list', optional($.parameter_list)),
+      optional($._return_clause),
+      'is',
+      field('declarations', optional($._declarations)),
+      'begin',
+      field('function_body', $.expressions),
+      'end',
+      field('end_name', optional($.identifier)),
+      ';'
+    ),
+
+    _return_clause: $ => seq(
+      'return',
+      field('return_type', $.identifier)
     ),
 
     _declarations: $ => seq($.declaration, repeat(
@@ -54,7 +74,7 @@ module.exports = grammar({
 
     variable_initialization: $ => seq(
       ':=',
-      $.number
+      $.numeric_literal
     ),
 
     parameter_declaration: $ => seq(
@@ -63,7 +83,7 @@ module.exports = grammar({
       field('type', $.identifier)
     ),
 
-    argument_list: $ => seq('(', commaSep($._expression), ')'),
+    argument_list: $ => seq('(', commaSep($.value), ')'),
 
     expressions: $ => seq($._expression_statement, repeat($._expression_statement)),
 
@@ -74,7 +94,13 @@ module.exports = grammar({
 
     expression: $ => choice(
       $.null_statement,
-      $.declare_block
+      $.declare_block,
+      $.return_statement
+    ),
+
+    return_statement: $ => seq(
+      'return',
+      $.value
     ),
 
     declare_block: $ => seq(
@@ -114,22 +140,24 @@ module.exports = grammar({
       // TODO: other kinds of statements
     ),
 
-    return_statement: $ => seq(
-      'return',
-      $._expression,
-      ';'
-    ),
-
-    _expression: $ => choice(
+    value: $ => choice(
       $.identifier,
-      $.number
+      $.numeric_literal
     ),
 
+    // TODO allow unicode names
     package_name: $ => /[a-zA-Z_.]+/,
 
     identifier: $ => /[a-zA-Z_]+/,
 
-    number: $ => /\d+/
+    numeric_literal: $ => choice(
+      $.real_literal,
+      $.integer_literal
+    ),
+
+    integer_literal: $ => /\d+/,
+
+    real_literal: $ => /[\d.]+/
   }
 });
 
