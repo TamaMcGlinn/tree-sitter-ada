@@ -2,7 +2,9 @@ module.exports = grammar({
   name: 'Ada',
 
   rules: {
-    source_file: $ => repeat($._definition),
+    source_file: $ => $._definitions,
+
+    _definitions: $ => seq($._definition, repeat($._definition)),
 
     _definition: $ => choice(
       $.with_statement,
@@ -19,6 +21,18 @@ module.exports = grammar({
       'package',
       field('name', $.package_name),
       'is',
+      field('definitions', optional($._definitions)),
+      'end',
+      field('end_name', optional($.identifier)),
+      ';'
+    ),
+
+    package_body: $ => seq(
+      'package',
+      'body',
+      field('name', $.package_name),
+      'is',
+      field('definitions', optional($._definitions)),
       'end',
       field('end_name', optional($.identifier)),
       ';'
@@ -45,7 +59,7 @@ module.exports = grammar({
       field('name', $.identifier),
       field('parameter_list', optional($.parameter_list)),
       'is',
-      field('declarations', optional($._declarations)),
+      field('declarations', optional($.declarations)),
       'begin',
       field('procedure_body', $.expressions),
       'end',
@@ -66,7 +80,7 @@ module.exports = grammar({
       field('parameter_list', optional($.parameter_list)),
       optional($._return_clause),
       'is',
-      field('declarations', optional($._declarations)),
+      field('declarations', optional($.declarations)),
       'begin',
       field('function_body', $.expressions),
       'end',
@@ -87,7 +101,7 @@ module.exports = grammar({
       field('return_type', $.identifier)
     ),
 
-    _declarations: $ => seq($.declaration, repeat(
+    declarations: $ => seq($.declaration, repeat(
       $.declaration
     )),
 
@@ -101,7 +115,8 @@ module.exports = grammar({
       field('variable_name', $.identifier),
       ':',
       field('type', $.identifier),
-      field('initial_value', optional($.variable_initialization))
+      field('initial_value', optional($.variable_initialization)),
+      ';'
     ),
 
     variable_initialization: $ => seq(
@@ -138,7 +153,7 @@ module.exports = grammar({
 
     declare_block: $ => seq(
       'declare',
-      field('declarations', optional($.declaration)),
+      field('declarations', optional($.declarations)),
       'begin',
       field('expressions', $.expressions),
       'end'
@@ -146,7 +161,10 @@ module.exports = grammar({
 
     declaration: $ => choice(
       $.variable_declaration,
-      $.procedure_definition
+      $.procedure_definition,
+      $.function_definition,
+      $.procedure_declaration,
+      $.function_declaration
     ),
 
     null_statement: $ => 'null',
@@ -173,18 +191,30 @@ module.exports = grammar({
     ),
 
     // TODO allow unicode names
-    package_name: $ => /[a-zA-Z_.]+/,
+    package_name: $ => /[a-zA-Z_\.]+/,
 
     identifier: $ => /[a-zA-Z_]+/,
 
     numeric_literal: $ => choice(
-      $.real_literal,
-      $.integer_literal
+      $.decimal_literal,
     ),
 
-    integer_literal: $ => /\d+/,
+    // See http://ada-auth.org/standards/12rm/html/RM-2-4-1.html
+    decimal_literal: $ => seq(
+      $._numeral,
+      optional(seq('.', $._numeral)),
+      optional($._exponent)
+    ),
 
-    real_literal: $ => /[\d.]+/
+    _numeral: $ => seq($._digit_or_underline, repeat($._digit_or_underline)),
+
+    _exponent: $ => seq(
+      'E',
+      field('sign', optional(/[+-]/)),
+      $._numeral
+    ),
+
+    _digit_or_underline: $ => /[\d_]+/,
   }
 });
 

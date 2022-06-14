@@ -15,6 +15,11 @@
     }
   },
   {
+    "type": "decimal_literal",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "declaration",
     "named": true,
     "fields": {},
@@ -23,11 +28,38 @@
       "required": true,
       "types": [
         {
+          "type": "function_declaration",
+          "named": true
+        },
+        {
+          "type": "function_definition",
+          "named": true
+        },
+        {
+          "type": "procedure_declaration",
+          "named": true
+        },
+        {
           "type": "procedure_definition",
           "named": true
         },
         {
           "type": "variable_declaration",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "declarations",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "declaration",
           "named": true
         }
       ]
@@ -42,7 +74,7 @@
         "required": false,
         "types": [
           {
-            "type": "declaration",
+            "type": "declarations",
             "named": true
           }
         ]
@@ -138,11 +170,11 @@
     "named": true,
     "fields": {
       "declarations": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "declaration",
+            "type": "declarations",
             "named": true
           }
         ]
@@ -208,11 +240,7 @@
       "required": true,
       "types": [
         {
-          "type": "integer_literal",
-          "named": true
-        },
-        {
-          "type": "real_literal",
+          "type": "decimal_literal",
           "named": true
         }
       ]
@@ -222,6 +250,44 @@
     "type": "package_specification",
     "named": true,
     "fields": {
+      "definitions": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "comment",
+            "named": true
+          },
+          {
+            "type": "function_declaration",
+            "named": true
+          },
+          {
+            "type": "function_definition",
+            "named": true
+          },
+          {
+            "type": "package_specification",
+            "named": true
+          },
+          {
+            "type": "procedure_declaration",
+            "named": true
+          },
+          {
+            "type": "procedure_definition",
+            "named": true
+          },
+          {
+            "type": "use_clause",
+            "named": true
+          },
+          {
+            "type": "with_statement",
+            "named": true
+          }
+        ]
+      },
       "end_name": {
         "multiple": false,
         "required": false,
@@ -326,11 +392,11 @@
     "named": true,
     "fields": {
       "declarations": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "declaration",
+            "type": "declarations",
             "named": true
           }
         ]
@@ -552,6 +618,10 @@
     "named": false
   },
   {
+    "type": ".",
+    "named": false
+  },
+  {
     "type": ":",
     "named": false
   },
@@ -564,7 +634,15 @@
     "named": false
   },
   {
+    "type": "E",
+    "named": false
+  },
+  {
     "type": "begin",
+    "named": false
+  },
+  {
+    "type": "body",
     "named": false
   },
   {
@@ -592,10 +670,6 @@
     "named": true
   },
   {
-    "type": "integer_literal",
-    "named": true
-  },
-  {
     "type": "is",
     "named": false
   },
@@ -614,10 +688,6 @@
   {
     "type": "procedure",
     "named": false
-  },
-  {
-    "type": "real_literal",
-    "named": true
   },
   {
     "type": "return",
