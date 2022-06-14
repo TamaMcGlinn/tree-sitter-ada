@@ -1,5 +1,10 @@
 [
   {
+    "type": "based_literal",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "comment",
     "named": true,
     "fields": {},
@@ -239,6 +244,10 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "based_literal",
+          "named": true
+        },
         {
           "type": "decimal_literal",
           "named": true
@@ -600,6 +609,10 @@
         }
       ]
     }
+  },
+  {
+    "type": "#",
+    "named": false
   },
   {
     "type": "(",

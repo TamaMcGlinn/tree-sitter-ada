@@ -11,6 +11,16 @@ procedure Foo is
   F : Integer := 0.0;
   G : Integer := 0.456;
   H : Integer := 3.14159_26;
+
+  I : Integer := 2#1111_1111#;
+  J : Integer := 16#FF#;
+  K : Integer := 016#0FF#;
+
+  L : Integer := 16#E#E1;
+  M : Integer := 2#1110_0000#;
+
+  O : Integer := 16#F.FF#E+2;
+  P : Integer := 2#1.1111_1111_1110#E11;
 begin
   null;
 end;
@@ -76,7 +86,56 @@ end;
           type: (identifier)
           initial_value: (variable_initialization
             (numeric_literal
-              (decimal_literal))))))
+              (decimal_literal)))))
+      (declaration
+        (variable_declaration
+          variable_name: (identifier)
+          type: (identifier)
+          initial_value: (variable_initialization
+            (numeric_literal
+              (based_literal)))))
+      (declaration
+        (variable_declaration
+          variable_name: (identifier)
+          type: (identifier)
+          initial_value: (variable_initialization
+            (numeric_literal
+              (based_literal)))))
+      (declaration
+        (variable_declaration
+          variable_name: (identifier)
+          type: (identifier)
+          initial_value: (variable_initialization
+            (numeric_literal
+              (based_literal)))))
+      (declaration
+        (variable_declaration
+          variable_name: (identifier)
+          type: (identifier)
+          initial_value: (variable_initialization
+            (numeric_literal
+              (based_literal)))))
+      (declaration
+        (variable_declaration
+          variable_name: (identifier)
+          type: (identifier)
+          initial_value: (variable_initialization
+            (numeric_literal
+              (based_literal)))))
+      (declaration
+        (variable_declaration
+          variable_name: (identifier)
+          type: (identifier)
+          initial_value: (variable_initialization
+            (numeric_literal
+              (based_literal)))))
+      (declaration
+        (variable_declaration
+          variable_name: (identifier)
+          type: (identifier)
+          initial_value: (variable_initialization
+            (numeric_literal
+              (based_literal))))))
     procedure_body: (expressions
       (expression
         (null_statement)))))

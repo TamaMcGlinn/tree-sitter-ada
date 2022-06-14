@@ -197,6 +197,7 @@ module.exports = grammar({
 
     numeric_literal: $ => choice(
       $.decimal_literal,
+      $.based_literal
     ),
 
     // See http://ada-auth.org/standards/12rm/html/RM-2-4-1.html
@@ -215,6 +216,25 @@ module.exports = grammar({
     ),
 
     _digit_or_underline: $ => /[\d_]+/,
+
+    // See http://ada-auth.org/standards/12rm/html/RM-2-4-2.html
+    based_literal: $ => seq(
+      $._base,
+      '#',
+      $._based_numeral,
+      optional(seq('.', $._based_numeral)),
+      '#',
+      optional($._exponent)
+    ),
+
+    _base: $ => $._numeral,
+
+    _based_numeral: $ => seq(
+      $._extended_digit,
+      repeat($._extended_digit)
+    ),
+
+    _extended_digit: $ => /[0-9A-F_]+/
   }
 });
 
