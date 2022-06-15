@@ -189,14 +189,18 @@ module.exports = grammar({
     // TODO allow unicode names
     package_name: $ => /[a-zA-Z_\.]+/,
 
-    identifier: $ => /[a-zA-Z_]+/,
-
     _literal: $ => choice(
       $.numeric_literal,
       $.character_literal,
       $.string_literal
     ),
 
+    // See http://ada-auth.org/standards/12rm/html/RM-2-3.html
+    // TODO allow unicode identifiers
+    // oddly enough, using [^ ;+-=]+ or similar gives parsing errors elsewhere
+    identifier: $ => /[a-zA-Z_]+/,
+
+    // See http://ada-auth.org/standards/12rm/html/RM-2-4.html
     numeric_literal: $ => choice(
       $.decimal_literal,
       $.based_literal

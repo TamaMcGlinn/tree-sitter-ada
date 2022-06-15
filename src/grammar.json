@@ -902,10 +902,6 @@
       "type": "PATTERN",
       "value": "[a-zA-Z_\\.]+"
     },
-    "identifier": {
-      "type": "PATTERN",
-      "value": "[a-zA-Z_]+"
-    },
     "_literal": {
       "type": "CHOICE",
       "members": [
@@ -935,6 +931,10 @@
           "name": "based_literal"
         }
       ]
+    },
+    "identifier": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z_]+"
     },
     "decimal_literal": {
       "type": "SEQ",
