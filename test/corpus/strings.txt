@@ -1,0 +1,69 @@
+==================
+Strings and characters
+==================
+
+procedure Foo is
+  A : Character := 'a';
+  B : String := "aaSLdkfj";
+  C : String := "";
+  D : String := """";
+
+  E : String := "Characters such as $, %, and } are allowed in string literals";
+  F : String := "Archimedes said ""Εύρηκα""";
+  G : String := "Volume of cylinder (πr²h) = ";
+begin
+  null;
+end Foo;
+
+---
+
+(source_file
+  (procedure_definition
+    name: (identifier)
+    declarations: (declarations
+      (declaration
+        (variable_declaration
+          variable_name: (identifier)
+          type: (identifier)
+          initial_value: (variable_initialization
+            (character_literal))))
+      (declaration
+        (variable_declaration
+          variable_name: (identifier)
+          type: (identifier)
+          initial_value: (variable_initialization
+            (string_literal))))
+      (declaration
+        (variable_declaration
+          variable_name: (identifier)
+          type: (identifier)
+          initial_value: (variable_initialization
+            (string_literal))))
+      (declaration
+        (variable_declaration
+          variable_name: (identifier)
+          type: (identifier)
+          initial_value: (variable_initialization
+            (string_literal))))
+      (declaration
+        (variable_declaration
+          variable_name: (identifier)
+          type: (identifier)
+          initial_value: (variable_initialization
+            (string_literal))))
+      (declaration
+        (variable_declaration
+          variable_name: (identifier)
+          type: (identifier)
+          initial_value: (variable_initialization
+            (string_literal))))
+      (declaration
+        (variable_declaration
+          variable_name: (identifier)
+          type: (identifier)
+          initial_value: (variable_initialization
+            (string_literal)))))
+    procedure_body: (expressions
+      (expression
+        (null_statement)))
+    end_name: (identifier)))

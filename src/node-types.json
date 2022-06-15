@@ -5,19 +5,9 @@
     "fields": {}
   },
   {
-    "type": "comment",
+    "type": "character_literal",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "comment_body",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "decimal_literal",
@@ -511,6 +501,11 @@
     }
   },
   {
+    "type": "string_literal",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "use_clause",
     "named": true,
     "fields": {},
@@ -589,7 +584,15 @@
       "required": true,
       "types": [
         {
+          "type": "character_literal",
+          "named": true
+        },
+        {
           "type": "numeric_literal",
+          "named": true
+        },
+        {
+          "type": "string_literal",
           "named": true
         }
       ]
@@ -611,7 +614,19 @@
     }
   },
   {
+    "type": "\"",
+    "named": false
+  },
+  {
+    "type": "\"\"",
+    "named": false
+  },
+  {
     "type": "#",
+    "named": false
+  },
+  {
+    "type": "'",
     "named": false
   },
   {
@@ -624,10 +639,6 @@
   },
   {
     "type": ",",
-    "named": false
-  },
-  {
-    "type": "--",
     "named": false
   },
   {
@@ -663,7 +674,7 @@
     "named": false
   },
   {
-    "type": "comment_body",
+    "type": "comment",
     "named": true
   },
   {

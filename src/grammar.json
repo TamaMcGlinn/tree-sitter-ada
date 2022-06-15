@@ -184,31 +184,6 @@
         }
       ]
     },
-    "comment": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "--"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "comment_body"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        }
-      ]
-    },
-    "comment_body": {
-      "type": "PATTERN",
-      "value": ".+"
-    },
     "with_statement": {
       "type": "SEQ",
       "members": [
@@ -652,7 +627,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "numeric_literal"
+          "name": "_literal"
         }
       ]
     },
@@ -931,6 +906,23 @@
       "type": "PATTERN",
       "value": "[a-zA-Z_]+"
     },
+    "_literal": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "numeric_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "character_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string_literal"
+        }
+      ]
+    },
     "numeric_literal": {
       "type": "CHOICE",
       "members": [
@@ -1112,6 +1104,60 @@
     "_extended_digit": {
       "type": "PATTERN",
       "value": "[0-9A-F_]+"
+    },
+    "character_literal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "'"
+        },
+        {
+          "type": "PATTERN",
+          "value": "."
+        },
+        {
+          "type": "STRING",
+          "value": "'"
+        }
+      ]
+    },
+    "string_literal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "\""
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_character"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "\""
+        }
+      ]
+    },
+    "_character": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[^\"]"
+        },
+        {
+          "type": "STRING",
+          "value": "\"\""
+        }
+      ]
+    },
+    "comment": {
+      "type": "PATTERN",
+      "value": "--[^\\n]*"
     }
   },
   "extras": [

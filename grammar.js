@@ -38,10 +38,6 @@ module.exports = grammar({
       ';'
     ),
 
-    comment: $ => seq('--', optional($.comment_body)),
-
-    comment_body: $ => /.+/,
-
     with_statement: $ => seq(
       'with',
       $.package_name,
@@ -121,7 +117,7 @@ module.exports = grammar({
 
     variable_initialization: $ => seq(
       ':=',
-      $.numeric_literal
+      $._literal
     ),
 
     parameter_declaration: $ => seq(
@@ -195,6 +191,12 @@ module.exports = grammar({
 
     identifier: $ => /[a-zA-Z_]+/,
 
+    _literal: $ => choice(
+      $.numeric_literal,
+      $.character_literal,
+      $.string_literal
+    ),
+
     numeric_literal: $ => choice(
       $.decimal_literal,
       $.based_literal
@@ -234,7 +236,29 @@ module.exports = grammar({
       repeat($._extended_digit)
     ),
 
-    _extended_digit: $ => /[0-9A-F_]+/
+    _extended_digit: $ => /[0-9A-F_]+/,
+
+    // See http://ada-auth.org/standards/12rm/html/RM-2-5.html
+    character_literal: $ => seq(
+      "'",
+      /./,
+      "'"
+    ),
+
+    // See http://ada-auth.org/standards/12rm/html/RM-2-6.html
+    string_literal: $ => seq(
+      '"',
+      repeat($._character),
+      '"'
+    ),
+
+    _character: $ => choice(
+      /[^"]/,
+      '""',
+    ),
+
+    // See http://ada-auth.org/standards/12rm/html/RM-2-7.html
+    comment: $ => /--[^\n]*/,
   }
 });
 

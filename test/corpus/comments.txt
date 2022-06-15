@@ -7,13 +7,16 @@ Comments
 
 with Ada.Text_IO; -- inline comment
 --
+with Ada.Text_IO;
 
 ---
 
 (source_file
-  (comment (comment_body))
-  (comment (comment_body))
+  (comment)
+  (comment)
   (with_statement
     (package_name))
-  (comment (comment_body))
-  (comment))
+  (comment)
+  (comment)
+  (with_statement
+    (package_name)))
