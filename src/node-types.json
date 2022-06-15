@@ -270,6 +270,10 @@
             "named": true
           },
           {
+            "type": "pragma",
+            "named": true
+          },
+          {
             "type": "procedure_declaration",
             "named": true
           },
@@ -355,6 +359,51 @@
       "types": [
         {
           "type": "parameter_declaration",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pragma",
+    "named": true,
+    "fields": {
+      "argument": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "pragma_argument_association",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "pragma_argument_association",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "value",
           "named": true
         }
       ]
@@ -482,6 +531,10 @@
           "named": true
         },
         {
+          "type": "pragma",
+          "named": true
+        },
+        {
           "type": "procedure_declaration",
           "named": true
         },
@@ -529,11 +582,19 @@
       "required": true,
       "types": [
         {
+          "type": "character_literal",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
         {
           "type": "numeric_literal",
+          "named": true
+        },
+        {
+          "type": "string_literal",
           "named": true
         }
       ]
@@ -658,6 +719,10 @@
     "named": false
   },
   {
+    "type": "=>",
+    "named": false
+  },
+  {
     "type": "E",
     "named": false
   },
@@ -708,6 +773,10 @@
   {
     "type": "package_name",
     "named": true
+  },
+  {
+    "type": "pragma",
+    "named": false
   },
   {
     "type": "procedure",

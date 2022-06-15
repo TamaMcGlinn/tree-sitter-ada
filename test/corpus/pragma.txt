@@ -1,0 +1,46 @@
+==================
+Pragmas
+==================
+
+pragma Page;
+pragma List(Off); -- turn off listing generation
+pragma Optimize(Off); -- turn off optional optimizations
+pragma Inline(Set_Mask); -- generate code for Set_Mask inline
+pragma Import(C, Put_Char, External_Name => "putchar"); -- import C putchar function
+
+---
+
+(source_file
+  (pragma
+    (identifier))
+  (pragma
+    (identifier)
+    (pragma_argument_association
+      (value
+        (identifier))))
+  (comment)
+  (pragma
+    (identifier)
+    (pragma_argument_association
+      (value
+        (identifier))))
+  (comment)
+  (pragma
+    (identifier)
+    (pragma_argument_association
+      (value
+        (identifier))))
+  (comment)
+  (pragma
+    (identifier)
+    (pragma_argument_association
+      (value
+        (identifier)))
+    (pragma_argument_association
+      (value
+        (identifier)))
+    (pragma_argument_association
+      (identifier)
+      (value
+        (string_literal))))
+  (comment))

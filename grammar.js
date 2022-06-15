@@ -14,7 +14,8 @@ module.exports = grammar({
       $.procedure_declaration,
       $.function_declaration,
       $.comment,
-      $.package_specification
+      $.package_specification,
+      $.pragma,
     ),
 
     package_specification: $ => seq(
@@ -183,7 +184,7 @@ module.exports = grammar({
 
     value: $ => choice(
       $.identifier,
-      $.numeric_literal
+      $._literal
     ),
 
     // TODO allow unicode names
@@ -263,6 +264,27 @@ module.exports = grammar({
 
     // See http://ada-auth.org/standards/12rm/html/RM-2-7.html
     comment: $ => /--[^\n]*/,
+
+    // See http://ada-auth.org/standards/12rm/html/RM-2-8.html
+    pragma: $ => seq(
+      'pragma',
+      field('name', $.identifier),
+      optional(seq(
+        '(',
+        field('argument', $.pragma_argument_association),
+        repeat(seq(
+          ',',
+          field('argument', $.pragma_argument_association),
+        )),
+        ')'
+      )),
+      ';'
+    ),
+
+    pragma_argument_association: $ => seq(
+      optional(seq($.identifier, "=>")), 
+      $.value
+    ),
   }
 });
 
