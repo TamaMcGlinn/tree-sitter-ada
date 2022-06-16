@@ -271,11 +271,7 @@ module.exports = grammar({
       field('name', $.identifier),
       optional(seq(
         '(',
-        field('argument', $.pragma_argument_association),
-        repeat(seq(
-          ',',
-          field('argument', $.pragma_argument_association),
-        )),
+        commaSep(field('argument', $.pragma_argument_association)),
         ')'
       )),
       ';'
