@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# This repeatedly runs `tree-sitter generate` to get each conflict,
+# adds it to the list of conflicts in grammar.js and re-runs until there are no conflicts
+# as discussed here, this feature should be added to tree-sitter itself:
+# https://github.com/tree-sitter/tree-sitter/issues/1365
+
+# To use, ensure that grammar.js has a list of conflicts like this:
+# conflicts: $ => [
+#   [optional other items already ending in comma],
+#   // insertion marker
+# ],
+# the insertion marker specifies the indentation that will be used
+
+add_conflict(){
+  echo "Inserting $1"
+  sed -i "s&\( *\)\(// insertion marker\)&\1$1\n\1\2&" grammar.js 
+}
+run_ts(){
+  tree-sitter generate &> last_ts_output
+}
+run_ts
+LINE=$(grep "Add a conflict" last_ts_output)
+while [ $? == 0 ]
+do
+  CONFLICT=$(echo $LINE | sed 's/.*: `/[$./' | sed 's/`$/],/' | sed 's/`,/,/g' | sed 's/`/$./g')
+  echo "Found conflict: $CONFLICT"
+  add_conflict "$CONFLICT"
+  run_ts
+  LINE=$(grep "Add a conflict" last_ts_output)
+done
+
+
